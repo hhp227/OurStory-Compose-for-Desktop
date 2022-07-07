@@ -18,15 +18,17 @@ fun App() {
 
     MaterialTheme {
         Button(onClick = {
-            text = "Hello, Desktop!"
+            text = "Hello, OurStory!"
         }) {
             Text(text)
         }
     }
 }
 
-fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+fun main() {
+    application {
+        Window(title = "OurStory", onCloseRequest = ::exitApplication) {
+            App()
+        }
     }
 }
