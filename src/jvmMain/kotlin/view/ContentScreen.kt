@@ -1,12 +1,13 @@
 package view
 
 import androidx.compose.runtime.Composable
+import viewmodel.ContentViewModel
 
 @Composable
 fun ContentScreen() {
-    var user: String? = ""
+    val contentViewModel = ContentViewModel()
 
-    if (user != null) {
+    if (contentViewModel.user != null) {
         MainScreen()
     } else {
         LoginScreen()
