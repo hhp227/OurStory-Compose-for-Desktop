@@ -7,34 +7,35 @@ import androidx.compose.runtime.saveable.rememberSaveable
 
 class NavController(
     private val startDestination: String,
-    var backStackScreens: MutableSet<String> = mutableSetOf()
+    var backStackScreens: MutableList<String> = mutableListOf(startDestination)
 ) {
-    var currentScreen: MutableState<String> = mutableStateOf(startDestination)
+    private var currentScreen: MutableState<String> = mutableStateOf(startDestination)
+
+    val currentBackStackScreen: String
+        get() = currentScreen.value
 
     val previousBackStackScreen: String?
         get() {
-            return backStackScreens.firstOrNull()
+            val iterator = backStackScreens.reversed().iterator()
+
+            if (iterator.hasNext()) {
+                iterator.next()
+            }
+            return iterator.asSequence().firstOrNull()
         }
 
     fun navigate(route: String) {
         if (route != currentScreen.value) {
-            if (backStackScreens.contains(currentScreen.value) && currentScreen.value != startDestination) {
-                backStackScreens.remove(currentScreen.value)
-            }
-            if (route == startDestination) {
-                backStackScreens = mutableSetOf()
-            } else {
-                backStackScreens.add(currentScreen.value)
-            }
             currentScreen.value = route
+
+            backStackScreens.add(currentScreen.value)
         }
     }
 
     fun navigateUp() {
         if (backStackScreens.isNotEmpty()) {
-            currentScreen.value = backStackScreens.last()
-
             backStackScreens.remove(currentScreen.value)
+            backStackScreens.lastOrNull()?.also { currentScreen.value = it }
         }
     }
 }
@@ -42,7 +43,7 @@ class NavController(
 @Composable
 fun rememberNavController(
     startDestination: String,
-    backStackScreens: MutableSet<String> = mutableSetOf()
+    backStackScreens: MutableList<String> = mutableListOf(startDestination)
 ): MutableState<NavController> = rememberSaveable {
     mutableStateOf(NavController(startDestination, backStackScreens))
 }

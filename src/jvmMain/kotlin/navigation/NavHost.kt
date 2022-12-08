@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 
 class NavHost(
     val navController: NavController,
+    startDestination: String,
     modifier: Modifier = Modifier,
     val contents: @Composable NavigationGraphBuilder.() -> Unit
 ) {
@@ -28,7 +29,7 @@ fun NavHost.NavigationGraphBuilder.composable(
     route: String,
     content: @Composable () -> Unit
 ) {
-    if (navController.currentScreen.value == route) {
+    if (navController.currentBackStackScreen == route) {
         content()
     }
 }

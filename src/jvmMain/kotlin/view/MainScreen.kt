@@ -1,10 +1,12 @@
 package view
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import navigation.NavHost
 import navigation.composable
 import navigation.rememberNavController
@@ -12,24 +14,30 @@ import navigation.rememberNavController
 @Composable
 fun MainScreen() {
     val navController by rememberNavController(Screen.Home.name)
+    val currentScreen = Screen.valueOf(navController.currentBackStackScreen)
 
     Scaffold(
         topBar = {
             OurStoryAppBar(
-                currentScreen = navController.currentScreen.value,
+                currentScreen = currentScreen,
                 canNavigateBack = navController.previousBackStackScreen != null,
                 navigateUp = navController::navigateUp
             )
         }
-    ) {
+    ) { innerPadding ->
         NavHost(
-            navController = navController
+            navController = navController,
+            startDestination = Screen.Home.name,
+            modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.name) {
                 HomeScreen(onButtonClicked = { navController.navigate(Screen.PostDetail.name) })
             }
             composable(Screen.PostDetail.name) {
-                PostDetailScreen()
+                PostDetailScreen(onButtonClicked = { navController.navigate(Screen.CreatePost.name) })
+            }
+            composable(Screen.CreatePost.name) {
+                CreatePostScreen()
             }
         }.build()
     }
@@ -37,12 +45,12 @@ fun MainScreen() {
 
 @Composable
 fun OurStoryAppBar(
-    currentScreen: String,
+    currentScreen: Screen,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit
 ) {
     TopAppBar(
-        title = { Text(text = currentScreen) },
+        title = { Text(text = currentScreen.name) },
         navigationIcon = if (canNavigateBack) {
             {
                 IconButton(onClick = navigateUp) {

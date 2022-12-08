@@ -6,11 +6,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 
 @Composable
-fun PostDetailScreen(onButtonClicked: () -> Unit) {
-    var text by remember { mutableStateOf("Hello, PostDetail!") }
+fun CreatePostScreen() {
+    var text by remember { mutableStateOf("Hello, CreatePostScreen!") }
 
     Column {
-        Button(onClick = onButtonClicked) {
+        Button(onClick = {
+            text = "Hello, OurStory!"
+        }) {
             Text(text)
         }
     }

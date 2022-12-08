@@ -1,5 +1,5 @@
 package view
 
 enum class Screen {
-    Home, Login, PostDetail
+    Home, PostDetail, CreatePost
 }
