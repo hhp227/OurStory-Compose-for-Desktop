@@ -1,11 +1,13 @@
 package view
 
 import androidx.compose.runtime.Composable
-import viewmodel.ContentViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import util.InjectorUtils
 
 @Composable
 fun ContentScreen() {
-    val contentViewModel = ContentViewModel()
+    val contentViewModel by InjectorUtils.provideContentViewModel().collectAsState()
 
     if (contentViewModel.user != null) {
         MainScreen()
