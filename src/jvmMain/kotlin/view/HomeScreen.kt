@@ -7,7 +7,7 @@ import androidx.compose.runtime.*
 
 @Composable
 fun HomeScreen(onButtonClicked: () -> Unit) {
-    var text by remember { mutableStateOf("Hello, view.HomeScreen!") }
+    var text by remember { mutableStateOf("Hello, HomeScreen!") }
 
     Column {
         Button(onClick = onButtonClicked) {

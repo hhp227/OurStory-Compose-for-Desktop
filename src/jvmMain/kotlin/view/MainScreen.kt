@@ -6,13 +6,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import helper.navigation.NavHost
+import helper.navigation.Screen
 import helper.navigation.composable
 import helper.navigation.rememberNavController
+import util.InjectorUtils
 
 @Composable
 fun MainScreen() {
+    val viewModel = remember { InjectorUtils.proviceMainViewModel() }
     val navController by rememberNavController(Screen.Home.name)
     val currentScreen = Screen.valueOf(navController.currentBackStackScreen)
 
@@ -31,7 +35,8 @@ fun MainScreen() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.name) {
-                HomeScreen(onButtonClicked = { navController.navigate(Screen.PostDetail.name) })
+                //HomeScreen(onButtonClicked = { navController.navigate(Screen.PostDetail.name) })
+                HomeScreen(onButtonClicked = { viewModel.clear() })
             }
             composable(Screen.PostDetail.name) {
                 PostDetailScreen(onButtonClicked = { navController.navigate(Screen.CreatePost.name) })

@@ -10,10 +10,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import util.InjectorUtils
+import viewmodel.LoginViewModel
 
 @Composable
 fun LoginScreen() {
-    val viewModel by InjectorUtils.provideLoginViewModel().collectAsState()
+    val viewModel = remember { InjectorUtils.provideLoginViewModel() }
 
     Box(contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -46,8 +47,8 @@ fun LoginScreen() {
                 Text("LOGIN")
             }
         }.also {
-            viewModel.state.user?.let {
-                println("StoreUser $it")
+            viewModel.state.user?.let { user ->
+                viewModel.storeUser(user)
             }
         }
         if (viewModel.state.isLoading) {

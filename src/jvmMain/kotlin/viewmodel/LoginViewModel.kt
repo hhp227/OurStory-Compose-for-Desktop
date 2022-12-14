@@ -7,6 +7,7 @@ import data.UserRepository
 import helper.PreferenceManager
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import model.Resource
 import model.User
 import java.util.regex.Pattern
@@ -35,8 +36,10 @@ class LoginViewModel internal constructor(
         return password.length > 5
     }
 
-    suspend fun storeUser(user: User) {
-        preferenceManager.storeUser(user)
+    fun storeUser(user: User) {
+        viewModelScope.launch {
+            preferenceManager.storeUser(user)
+        }
     }
 
     fun login() {
