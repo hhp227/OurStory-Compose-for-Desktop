@@ -24,12 +24,29 @@ class NavController(
             return iterator.asSequence().firstOrNull()
         }
 
+    fun popBackStack(): Boolean {
+        return if (backStackScreens.isEmpty()) {
+            // Nothing to pop if the back stack is empty
+            false
+        } else {
+            popBackStack(currentBackStackScreen, true)
+        }
+    }
+
+    fun popBackStack(currentBackStackScreen: String, inclusive: Boolean): Boolean {
+        return backStackScreens.remove(currentBackStackScreen)
+    }
+
     fun navigate(route: String) {
         if (route != currentScreen.value) {
             currentScreen.value = route
 
             backStackScreens.add(currentScreen.value)
         }
+    }
+
+    fun navigate(route: String, builder: Unit.() -> Unit) {
+        navigate(route).apply(builder)
     }
 
     fun navigateUp() {

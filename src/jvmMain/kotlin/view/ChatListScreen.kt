@@ -6,10 +6,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 
 @Composable
-fun LoungeScreen(onButtonClicked: () -> Unit) {
+fun ChatListScreen() {
+    var text by remember { mutableStateOf("Hello, ChatListScreen!") }
+
     Column {
-        Button(onClick = onButtonClicked) {
-            Text("Hello, LoungeScreen!")
+        Button(onClick = {
+            text = "Hello, OurStory!"
+        }) {
+            Text(text)
         }
     }
 }

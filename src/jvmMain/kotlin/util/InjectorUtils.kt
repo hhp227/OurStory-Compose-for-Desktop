@@ -1,14 +1,12 @@
 package util
 
 import api.AuthService
-import com.sun.tools.javac.Main
 import data.UserRepository
 import helper.PreferenceManager
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import viewmodel.ContentViewModel
 import viewmodel.LoginViewModel
 import viewmodel.MainViewModel
+import viewmodel.RegisterViewModel
 
 object InjectorUtils {
     private val preferenceManager = PreferenceManager()
@@ -21,6 +19,10 @@ object InjectorUtils {
 
     fun provideLoginViewModel(): LoginViewModel {
         return LoginViewModel(getUserRepository(), getPreferenceManager())
+    }
+
+    fun provideRegisterViewModel(): RegisterViewModel {
+        return RegisterViewModel(getUserRepository(), getPreferenceManager())
     }
 
     fun provideContentViewModel(): ContentViewModel {

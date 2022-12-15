@@ -1,5 +1,6 @@
 package viewmodel
 
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -23,6 +24,8 @@ class LoginViewModel internal constructor(
     var password by mutableStateOf("")
 
     var state by mutableStateOf(State())
+
+    var snackbarHostState by mutableStateOf(SnackbarHostState())
 
     private fun isEmailValid(email: String): Boolean {
         return if (!email.contains('@')) {
@@ -61,13 +64,20 @@ class LoginViewModel internal constructor(
                         }
                         is Resource.Loading -> {
                             state = state.copy(
-                                isLoading = true
+                                isLoading = true,
+                                error = ""
                             )
                         }
                     }
                 }.launchIn(viewModelScope)
         } else {
             println("email 또는 password가 잘못되었습니다.")
+        }
+    }
+
+    fun showSnackBar() {
+        viewModelScope.launch {
+            snackbarHostState.showSnackbar(state.error)
         }
     }
 

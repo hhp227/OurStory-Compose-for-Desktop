@@ -1,5 +1,6 @@
 package helper.navigation
 
 enum class Screen {
-    Home, PostDetail, CreatePost
+    Lounge, GroupList, FriendList, ChatList, Logout,
+    PostDetail, CreatePost
 }
