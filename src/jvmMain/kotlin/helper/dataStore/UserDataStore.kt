@@ -20,7 +20,7 @@ class UserDataStore : DataStore<User?> {
         return _data.updateAndGet { transform.invoke(it) }.also { user ->
             if (user != null) {
                 json.encodeToJsonElement(user).jsonObject.forEach { t, u ->
-                    userPreferences.put(t, u.toString())
+                    userPreferences.put(t, u.toString().replace("\"", ""))
                 }
             } else {
                 userPreferences.clear()
