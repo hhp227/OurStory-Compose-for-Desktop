@@ -22,23 +22,28 @@ fun LoginScreen() {
     Box(contentAlignment = Alignment.Center) {
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
             Column {
-                Text("Welcome", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.h4)
+                Text(
+                    text = "Welcome",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h4
+                )
                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
-                    Text("Email")
+                    Text("Email", modifier = Modifier.padding(bottom = 10.dp))
                     TextField(
                         viewModel.email,
                         onValueChange = { viewModel.email = it },
-                        modifier = Modifier.fillMaxWidth().padding(10.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         placeholder = {
                             Text("Email")
                         },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                     )
-                    Text("Password")
+                    Text("Password", modifier = Modifier.padding(vertical = 10.dp))
                     TextField(
                         viewModel.password,
                         onValueChange = { viewModel.password = it },
-                        modifier = Modifier.fillMaxWidth().padding(10.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         placeholder = {
                             Text("Password")
                         },
@@ -46,8 +51,8 @@ fun LoginScreen() {
                     )
                 }
             }
-            Button(onClick = viewModel::login, modifier = Modifier.width(200.dp)) {
-                Text("LOGIN", fontSize = 15.sp, textAlign = TextAlign.Center)
+            Button(onClick = viewModel::login, modifier = Modifier.fillMaxWidth().padding(10.dp)) {
+                Text("LOGIN", modifier = Modifier.padding(10.dp), fontSize = 15.sp, textAlign = TextAlign.Center)
             }
             TextButton(onClick = {
 
