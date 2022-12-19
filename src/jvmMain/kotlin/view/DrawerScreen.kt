@@ -46,16 +46,16 @@ fun DrawerScreen(viewModel: MainViewModel, currentRoute: Screen, onDrawerButtonC
         Text(text = user?.email ?: "email", color = Color.White)
     }
     Divider(color = MaterialTheme.colors.onSurface.copy(alpha = .2f))
-    DrawerButton(Icons.Filled.Home, Screen.Lounge.name, currentRoute.name == Screen.Lounge.name) {
+    DrawerButton(Icons.Filled.ChatBubble, Screen.Lounge.name, currentRoute.name == Screen.Lounge.name) {
         onDrawerButtonClick(Screen.Lounge.name)
     }
-    DrawerButton(Icons.Filled.List, Screen.GroupList.name, currentRoute.name == Screen.GroupList.name) {
+    DrawerButton(Icons.Filled.Group, Screen.GroupList.name, currentRoute.name == Screen.GroupList.name) {
         onDrawerButtonClick(Screen.GroupList.name)
     }
     DrawerButton(Icons.Filled.Person, Screen.FriendList.name, currentRoute.name == Screen.FriendList.name) {
         onDrawerButtonClick(Screen.FriendList.name)
     }
-    DrawerButton(Icons.Filled.Info, Screen.ChatList.name, currentRoute.name == Screen.ChatList.name) {
+    DrawerButton(Icons.Filled.Message, Screen.ChatList.name, currentRoute.name == Screen.ChatList.name) {
         onDrawerButtonClick(Screen.ChatList.name)
     }
     DrawerButton(Icons.Filled.ExitToApp, Screen.Logout.name, currentRoute.name == Screen.Logout.name) {
