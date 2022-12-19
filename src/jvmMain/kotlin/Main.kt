@@ -29,3 +29,51 @@ fun main() {
         }
     }
 }
+
+/*fun main() {
+    application {
+        val state = remember { mutableStateOf(false) }
+
+        LaunchedEffect(null) {
+            delay(1000)
+            state.value = !state.value
+        }
+        if (state.value) {
+            Window(title = "OurStory", onCloseRequest = ::exitApplication) {
+                App()
+            }
+        } else {
+            Window(
+                onCloseRequest = ::exitApplication,
+                title = "Image Viewer",
+                state = WindowState(
+                    position = WindowPosition.Aligned(Alignment.Center),
+                    size = getPreferredWindowSize(800, 300)
+                ),
+                undecorated = true,
+            ) {
+                MaterialTheme {
+                    Box(Modifier.fillMaxSize().background(DarkGray)) {
+                        Text(
+                            // TODO implement common resources
+                            "Image Viewer",
+                            Modifier.align(Alignment.Center),
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 100.sp
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+fun getPreferredWindowSize(desiredWidth: Int, desiredHeight: Int): DpSize {
+    val screenSize: Dimension = Toolkit.getDefaultToolkit().screenSize
+    val preferredWidth: Int = (screenSize.width * 0.8f).toInt()
+    val preferredHeight: Int = (screenSize.height * 0.8f).toInt()
+    val width: Int = if (desiredWidth < preferredWidth) desiredWidth else preferredWidth
+    val height: Int = if (desiredHeight < preferredHeight) desiredHeight else preferredHeight
+    return DpSize(width.dp, height.dp)
+}*/
