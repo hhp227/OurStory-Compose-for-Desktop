@@ -19,10 +19,6 @@ class LoginViewModel internal constructor(
     private val repository: UserRepository,
     private val preferenceManager: PreferenceManager
 ): ViewModel() {
-    var email by mutableStateOf("")
-
-    var password by mutableStateOf("")
-
     var state by mutableStateOf(State())
 
     var snackbarHostState by mutableStateOf(SnackbarHostState())
@@ -46,8 +42,8 @@ class LoginViewModel internal constructor(
     }
 
     fun login() {
-        if (isEmailValid(email) && isPasswordValid(password)) {
-            repository.login(email, password)
+        if (isEmailValid(state.email) && isPasswordValid(state.password)) {
+            repository.login(state.email, state.password)
                 .onEach { result ->
                     when (result) {
                         is Resource.Success -> {
@@ -82,6 +78,8 @@ class LoginViewModel internal constructor(
     }
 
     data class State(
+        var email: String = "",
+        var password: String = "",
         val isLoading: Boolean = false,
         val user: User? = null,
         val error: String = ""

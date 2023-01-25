@@ -1,7 +1,9 @@
 package view
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -31,8 +33,8 @@ fun LoginScreen() {
                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
                     Text("Email", modifier = Modifier.padding(bottom = 10.dp))
                     TextField(
-                        viewModel.email,
-                        onValueChange = { viewModel.email = it },
+                        viewModel.state.email,
+                        onValueChange = { viewModel.state.email = it },
                         modifier = Modifier.fillMaxWidth(),
                         placeholder = {
                             Text("Email")
@@ -41,8 +43,8 @@ fun LoginScreen() {
                     )
                     Text("Password", modifier = Modifier.padding(vertical = 10.dp))
                     TextField(
-                        viewModel.password,
-                        onValueChange = { viewModel.password = it },
+                        viewModel.state.password,
+                        onValueChange = { viewModel.state.password = it },
                         modifier = Modifier.fillMaxWidth(),
                         placeholder = {
                             Text("Password")
