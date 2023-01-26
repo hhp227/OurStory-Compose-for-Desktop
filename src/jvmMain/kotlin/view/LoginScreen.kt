@@ -33,22 +33,18 @@ fun LoginScreen() {
                 Column(modifier = Modifier.padding(10.dp), horizontalAlignment = Alignment.Start) {
                     Text("Email", modifier = Modifier.padding(bottom = 10.dp))
                     TextField(
-                        viewModel.state.email,
-                        onValueChange = { viewModel.state.email = it },
+                        value = viewModel.state.email,
+                        onValueChange = { viewModel.state = viewModel.state.copy(email = it) },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = {
-                            Text("Email")
-                        },
+                        placeholder = { Text("Email") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                     )
                     Text("Password", modifier = Modifier.padding(vertical = 10.dp))
                     TextField(
-                        viewModel.state.password,
-                        onValueChange = { viewModel.state.password = it },
+                        value = viewModel.state.password,
+                        onValueChange = { viewModel.state = viewModel.state.copy(password = it) },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = {
-                            Text("Password")
-                        },
+                        placeholder = { Text("Password") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                     )
                 }
