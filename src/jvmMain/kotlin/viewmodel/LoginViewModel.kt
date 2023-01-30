@@ -78,8 +78,8 @@ class LoginViewModel internal constructor(
     }
 
     data class State(
-        var email: String = "",
-        var password: String = "",
+        val email: String = "",
+        val password: String = "",
         val isLoading: Boolean = false,
         val user: User? = null,
         val error: String = ""
